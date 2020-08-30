@@ -86,7 +86,7 @@ void mixing_column(uc *temp)
     {
         a[c] = temp[c];
         d = (uc)((signed char)temp[c] >> 7); //If high bit of temp[c] is set
-        b[c] = temp[c] << 1;                 //remove high bit xor with 0x1B
+        b[c] = temp[c] << 1;
         b[c] ^= 0x1B & d;
     }
     temp[0] = b[0] ^ a[3] ^ a[2] ^ b[1] ^ a[1]; //2*a0 + 3*a1 + a2 + a3
@@ -269,25 +269,25 @@ int main()
         Encryption(pad_msg, Anotherkeys, enc_msg);
 
         // //print encrypted message
-        cout << "Encrypted message is: ";
-        for (int i = 0; i < 16; i++)
-        {
-            cout << enc_msg[i] << " ";
-        }
+        // cout << "Encrypted message is: ";
+        // for (int i = 0; i < 16; i++)
+        // {
+        //     cout << enc_msg[i] << " ";
+        // }
         ofstream aes;
         aes.open("encrypt");
         for (int i = 0; i < 16; i++)
         {
-            aes << enc_msg[i] << " ";
+            aes << enc_msg[i];
         }
         aes.close();
-        // cout << endl
-        //      << "Encrypted message in hex: ";
-        // for (int i = 0; i < 16; i++)
-        // {
-        //     cout << setfill('0') << setw(2) << hex << (int)enc_msg[i] << uppercase;
-        //     cout << " ";
-        // }
+        cout << endl
+             << "Encrypted message in hex: " << endl;
+        for (int i = 0; i < 16; i++)
+        {
+            cout << setfill('0') << setw(2) << hex << (int)enc_msg[i] << uppercase;
+            cout << " ";
+        }
     }
     else
     {
